@@ -1,0 +1,321 @@
+/* ==========================================================================
+   ABDULLAH B — PORTFOLIO LAYOUT & FLOATING CAPSULE NAVIGATION
+   ========================================================================== */
+
+/* Page Section Shell */
+.page-section {
+  padding: 110px 0;
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   FLOATING CAPSULE NAVBAR (BRAND: Abdullah B)
+   -------------------------------------------------------------------------- */
+.navbar-capsule-container {
+  position: fixed;
+  top: 24px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.navbar-capsule {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-glass-capsule);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-glass-bright);
+  padding: 6px 10px 6px 20px;
+  border-radius: var(--radius-capsule);
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-brand-logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 12px;
+}
+
+.nav-brand-logo .brand-mark-metal {
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(135deg, #FFFFFF 0%, #94A3B8 100%);
+  color: #10141E;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 900;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.nav-capsule-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+}
+
+.nav-capsule-link {
+  font-family: var(--font-display);
+  font-size: 0.825rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: var(--radius-capsule);
+  transition: all 0.2s ease;
+}
+
+.nav-capsule-link:hover,
+.nav-capsule-link.active {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-capsule-btn {
+  font-family: var(--font-display);
+  font-size: 0.825rem;
+  font-weight: 700;
+  background: var(--text-primary);
+  color: #10141E;
+  padding: 7px 18px;
+  border-radius: var(--radius-capsule);
+  transition: all 0.25s ease;
+  margin-left: 8px;
+}
+
+.nav-capsule-btn:hover {
+  background: var(--accent-blue-soft);
+  color: #10141E;
+  box-shadow: 0 0 20px var(--accent-blue-soft);
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 1 — HERO SECTION (PRIMARY NAME: Abdullah B)
+   -------------------------------------------------------------------------- */
+.hero-section-cinematic {
+  padding-top: 150px;
+  padding-bottom: 100px;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-layout-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-giant-name {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.hero-title-badge {
+  font-family: var(--font-mono);
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent-blue-soft);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.hero-tagline-text {
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 52ch;
+  margin-bottom: 32px;
+}
+
+.hero-meta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.meta-pill {
+  font-family: var(--font-mono);
+  font-size: 0.775rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass-bright);
+  color: var(--text-secondary);
+  padding: 5px 14px;
+  border-radius: var(--radius-capsule);
+}
+
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 2 — ABOUT SECTION
+   -------------------------------------------------------------------------- */
+.about-grid-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.about-statement {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.about-body-text {
+  font-size: 1.025rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 3 — EXPERIENCE SECTION
+   -------------------------------------------------------------------------- */
+.experience-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 36px;
+}
+
+.experience-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 32px;
+  align-items: flex-start;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.experience-panel:hover {
+  border-color: var(--border-glass-bright);
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.exp-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.exp-dates {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-blue-soft);
+}
+
+.exp-role-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.exp-company {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.exp-description {
+  font-size: 0.975rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.hero-3d-spacer {
+  height: 450px;
+}
+
+.about-3d-spacer {
+  height: 400px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 992px) {
+  .hero-layout-grid,
+  .about-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .hero-3d-spacer {
+    height: 200px;
+  }
+  .about-3d-spacer {
+    height: 180px;
+  }
+  .experience-panel {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 24px;
+  }
+  .hero-giant-name {
+    font-size: 4.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-capsule-links {
+    display: none;
+  }
+  .hero-giant-name {
+    font-size: 3.5rem;
+  }
+  .page-section {
+    padding: 80px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-3d-spacer {
+    height: 160px;
+  }
+  .about-3d-spacer {
+    height: 140px;
+  }
+}

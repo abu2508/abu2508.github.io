@@ -1,0 +1,68 @@
+/* ==========================================================================
+   ABDULLAH B (ABU) — CINEMATIC TRANSITIONS & ACCESSIBILITY
+   Easing: cubic-bezier(0.16, 1, 0.3, 1)
+   ========================================================================== */
+
+/* Cinematic Scroll Reveals */
+.cinematic-reveal {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.cinematic-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Stagger Delays */
+.stagger-1 { transition-delay: 0.08s; }
+.stagger-2 { transition-delay: 0.16s; }
+.stagger-3 { transition-delay: 0.24s; }
+.stagger-4 { transition-delay: 0.32s; }
+.stagger-5 { transition-delay: 0.40s; }
+
+/* Metallic Shimmer Overlay */
+@keyframes metallic-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.metallic-card-shimmer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.8s ease;
+}
+
+.metallic-card-shimmer:hover::before {
+  animation: metallic-shimmer 1.2s ease forwards;
+}
+
+/* Accessibility: Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .cinematic-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  #webgl-canvas {
+    display: none !important;
+  }
+}

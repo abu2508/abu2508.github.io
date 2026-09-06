@@ -1,0 +1,182 @@
+/* ==========================================================================
+   ABDULLAH B — PORTFOLIO DESIGN SYSTEM
+   Visual Direction: TWILIGHT / SOFT-DARK / LUXURY TECH
+   Palette: Smoked Graphite Base (65% Dark + 35% Daylight Influence)
+   Materials: Brushed Titanium Silver, Dark Chrome, Warm Ivory Typography
+   ========================================================================== */
+
+:root {
+  /* Twilight / Soft-Dark Graphite Palette (NO PURE BLACK #000000) */
+  --bg-twilight: #10141E;
+  --bg-surface: #161B26;
+  --bg-surface-elevated: #1E2536;
+  --bg-card: rgba(26, 33, 48, 0.75);
+  --bg-card-hover: rgba(34, 43, 62, 0.9);
+  --bg-glass-capsule: rgba(22, 28, 40, 0.85);
+
+  /* Warm Ivory & Silver Typography */
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+  --text-dim: #64748B;
+
+  /* Metallic Silver & Titanium Highlights */
+  --metal-titanium: #E2E8F0;
+  --metal-silver: #CBD5E1;
+  --metal-dark-chrome: #64748B;
+
+  /* Restrained Studio Studio Accents (NO NEON) */
+  --accent-blue-soft: #38BDF8;
+  --accent-blue-glow: rgba(56, 189, 248, 0.15);
+  --accent-violet-soft: #818CF8;
+  --accent-violet-glow: rgba(129, 140, 248, 0.15);
+  --accent-emerald: #34D399;
+
+  /* Soft Glass Borders & Studio Highlights */
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-glass-bright: rgba(255, 255, 255, 0.22);
+  --border-titanium: rgba(226, 232, 240, 0.25);
+
+  /* Typography Families */
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Radius Tokens */
+  --radius-capsule: 9999px;
+  --radius-xl: 24px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+
+  /* Soft Studio Shadows */
+  --shadow-card: 0 20px 45px rgba(0, 0, 0, 0.4);
+  --shadow-studio: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+  --max-width: 1280px;
+}
+
+/* Global Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-twilight);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-twilight);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Fixed WebGL Canvas Background Layer */
+#webgl-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Main Content Wrapper (Above 3D Canvas) */
+#app-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Selection */
+::selection {
+  background: rgba(56, 189, 248, 0.25);
+  color: #FFF;
+}
+
+/* Links & Focus */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-blue-soft);
+  outline-offset: 4px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-twilight);
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Container */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Section Meta Tag */
+.section-meta-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.775rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--metal-silver);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-glass-bright);
+  padding: 4px 14px;
+  border-radius: var(--radius-capsule);
+  margin-bottom: 16px;
+}
+
+.section-meta-tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-blue-soft);
+  border-radius: 50%;
+}
+
+.section-editorial-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.gradient-text-metal {
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
