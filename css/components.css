@@ -310,3 +310,236 @@
   color: var(--text-secondary);
   line-height: 1.65;
 }
+
+/* --------------------------------------------------------------------------
+   3D TITANIUM MONOGRAM "A" SCULPTURE (DOM + CSS 3D HARDWARE ACCELERATED)
+   -------------------------------------------------------------------------- */
+.hero-3d-spacer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 440px;
+  position: relative;
+}
+
+.hero-monogram-container {
+  width: 320px;
+  height: 380px;
+  position: relative;
+  perspective: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-monogram-sculpture {
+  width: 240px;
+  height: 320px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: float-monogram 6s ease-in-out infinite alternate;
+}
+
+@keyframes float-monogram {
+  0% { transform: translateY(0px) rotateY(-8deg) rotateX(4deg); }
+  50% { transform: translateY(-16px) rotateY(10deg) rotateX(-6deg); }
+  100% { transform: translateY(0px) rotateY(-8deg) rotateX(4deg); }
+}
+
+/* Structural Pillars of "A" */
+.monogram-pillar {
+  position: absolute;
+  width: 32px;
+  height: 250px;
+  top: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.7);
+  transition: all 0.35s ease;
+}
+
+.monogram-pillar-left {
+  left: 65px;
+  transform: rotate(-18deg);
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 30%, #94A3B8 70%, #475569 100%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.monogram-pillar-right {
+  right: 65px;
+  transform: rotate(18deg);
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 30%, #94A3B8 70%, #475569 100%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.monogram-crossbar {
+  position: absolute;
+  top: 170px;
+  left: 45px;
+  width: 150px;
+  height: 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #334155 0%, #1E293B 50%, #0F172A 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  z-index: 4;
+}
+
+.monogram-apex-ring {
+  position: absolute;
+  top: 12px;
+  left: 95px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 6px solid #E2E8F0;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.8);
+  background: transparent;
+  z-index: 5;
+}
+
+/* Glowing Sapphire Core */
+.monogram-core-nucleus {
+  position: absolute;
+  top: 128px;
+  left: 95px;
+  width: 50px;
+  height: 50px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, #38BDF8 0%, #0284C7 100%);
+  border-radius: 12px;
+  box-shadow: 0 0 35px #38BDF8, inset 0 0 15px #FFFFFF;
+  z-index: 6;
+  animation: pulse-core 3s ease-in-out infinite alternate;
+}
+
+.core-inner-glow {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.4);
+  filter: blur(4px);
+}
+
+@keyframes pulse-core {
+  0% { transform: rotate(45deg) scale(0.92); box-shadow: 0 0 25px rgba(56, 189, 248, 0.6); }
+  100% { transform: rotate(45deg) scale(1.08); box-shadow: 0 0 45px rgba(56, 189, 248, 1), 0 0 60px rgba(129, 140, 248, 0.5); }
+}
+
+/* Orbiting Outer Glass Halos */
+.monogram-halo-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.halo-ring-1 {
+  width: 270px;
+  height: 270px;
+  top: 25px;
+  left: -15px;
+  border: 2px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.2), inset 0 0 15px rgba(56, 189, 248, 0.15);
+  transform: rotateX(75deg) rotateY(15deg);
+  animation: orbit-halo-1 12s linear infinite;
+}
+
+.halo-ring-2 {
+  width: 230px;
+  height: 230px;
+  top: 45px;
+  left: 5px;
+  border: 2px solid rgba(129, 140, 248, 0.35);
+  box-shadow: 0 0 20px rgba(129, 140, 248, 0.2);
+  transform: rotateX(-60deg) rotateY(30deg);
+  animation: orbit-halo-2 16s linear infinite reverse;
+}
+
+@keyframes orbit-halo-1 {
+  0% { transform: rotateX(75deg) rotateY(15deg) rotateZ(0deg); }
+  100% { transform: rotateX(75deg) rotateY(15deg) rotateZ(360deg); }
+}
+
+@keyframes orbit-halo-2 {
+  0% { transform: rotateX(-60deg) rotateY(30deg) rotateZ(0deg); }
+  100% { transform: rotateX(-60deg) rotateY(30deg) rotateZ(360deg); }
+}
+
+/* Orbiting Tech Nodes */
+.monogram-orbit-nodes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.orbit-node {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: var(--radius-capsule);
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-glass-bright);
+  color: var(--accent-blue-soft);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: float-node 4s ease-in-out infinite alternate;
+}
+
+.orbit-node.node-1 { top: 10px; left: -30px; animation-delay: 0s; }
+.orbit-node.node-2 { top: 120px; right: -35px; animation-delay: 0.8s; }
+.orbit-node.node-3 { bottom: 20px; left: -25px; animation-delay: 1.6s; }
+.orbit-node.node-4 { bottom: 10px; right: -20px; animation-delay: 2.4s; }
+.orbit-node.node-5 { top: 0px; right: 20px; animation-delay: 3.2s; }
+
+@keyframes float-node {
+  0% { transform: translateY(0px) scale(0.95); }
+  100% { transform: translateY(-8px) scale(1.05); }
+}
+
+/* --------------------------------------------------------------------------
+   LIGHT MODE METALLIC SCULPTURE PALETTE (DAYLIGHT TITANIUM & OBSIDIAN SLATE)
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .monogram-pillar-left,
+[data-theme="light"] .monogram-pillar-right {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 40%, #334155 80%, #475569 100%) !important;
+  border: 1px solid rgba(15, 23, 42, 0.3) !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.5) !important;
+}
+
+[data-theme="light"] .monogram-crossbar {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%) !important;
+  border: 1px solid rgba(2, 132, 199, 0.4) !important;
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3) !important;
+}
+
+[data-theme="light"] .monogram-apex-ring {
+  border-color: #0F172A !important;
+  box-shadow: 0 0 20px rgba(2, 132, 199, 0.3), inset 0 0 10px rgba(15, 23, 42, 0.2) !important;
+}
+
+[data-theme="light"] .monogram-core-nucleus {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%) !important;
+  box-shadow: 0 0 35px rgba(2, 132, 199, 0.6), inset 0 0 15px #FFFFFF !important;
+}
+
+[data-theme="light"] .halo-ring-1 {
+  border-color: rgba(2, 132, 199, 0.45) !important;
+  box-shadow: 0 0 25px rgba(2, 132, 199, 0.2) !important;
+}
+
+[data-theme="light"] .halo-ring-2 {
+  border-color: rgba(99, 102, 241, 0.4) !important;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.18) !important;
+}
+
+[data-theme="light"] .orbit-node {
+  background: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.18) !important;
+  color: #0284C7 !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12) !important;
+}

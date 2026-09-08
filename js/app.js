@@ -106,7 +106,26 @@ function initApp() {
     });
   }
 
-  // 4. 3D Card Perspective Tilt Micro-Interactions (Fine Pointer / Mouse Only)
+  // 4. 3D Monogram & Card Perspective Tilt Micro-Interactions (Fine Pointer / Mouse Only)
+  const heroMonogram = document.getElementById("heroMonogramSculpture");
+  const heroSection = document.getElementById("hero");
+  if (heroMonogram && heroSection) {
+    heroSection.addEventListener("mousemove", (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -12;
+      const rotateY = ((x - centerX) / centerX) * 16;
+      heroMonogram.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+    });
+
+    heroSection.addEventListener("mouseleave", () => {
+      heroMonogram.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
+    });
+  }
+
   const cards3D = document.querySelectorAll(".project-product-card, .experience-panel, .tech-group-card");
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;
