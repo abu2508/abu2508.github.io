@@ -24,7 +24,7 @@ function initThreeScene() {
 
   // 1. Create Scene & Twilight Fog
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x10141E, 0.016);
+  scene.fog = new THREE.FogExp2(0x10141E, 0.007);
 
   // 2. Create Perspective Camera
   const fov = 45;

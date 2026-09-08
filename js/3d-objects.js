@@ -213,36 +213,37 @@ function build3DObjects(scene) {
   window.contactArtifactGroup = contactGroup;
 
   // --------------------------------------------------------------------------
-  // 7. CONTINUOUS FLOATING BACKGROUND 3D OBJECTS ARRAY (y = +15 to y = -110)
+  // 7. CONTINUOUS FLOATING BACKGROUND 3D OBJECTS ARRAY (y = +20 to y = -120)
   // --------------------------------------------------------------------------
   const floatingElementsGroup = new THREE.Group();
   const backgroundFloatingElements = [];
 
   const geometries = [
-    new THREE.SphereGeometry(0.35, 16, 16),
-    new THREE.BoxGeometry(0.5, 0.5, 0.5),
-    new THREE.OctahedronGeometry(0.4, 1),
-    new THREE.TorusGeometry(0.45, 0.1, 16, 32),
-    new THREE.TetrahedronGeometry(0.4, 0),
-    new THREE.DodecahedronGeometry(0.35, 0)
+    new THREE.SphereGeometry(0.45, 16, 16),
+    new THREE.BoxGeometry(0.6, 0.6, 0.6),
+    new THREE.OctahedronGeometry(0.55, 1),
+    new THREE.TorusGeometry(0.55, 0.14, 16, 32),
+    new THREE.TetrahedronGeometry(0.5, 0),
+    new THREE.DodecahedronGeometry(0.45, 0),
+    new THREE.IcosahedronGeometry(0.5, 0)
   ];
 
-  const materials = [titaniumMaterial, darkChromeMaterial, glassRefractiveMat, accentBlueEmissiveMat];
+  const materials = [titaniumMaterial, darkChromeMaterial, glassRefractiveMat, accentBlueEmissiveMat, latticeWireframeMat];
 
-  // Distribute 48 floating objects along the vertical axis from y = 15 down to y = -110
-  for (let i = 0; i < 48; i++) {
+  // Distribute 64 floating objects along the vertical axis from y = 20 down to y = -120
+  for (let i = 0; i < 64; i++) {
     const geo = geometries[i % geometries.length];
     const mat = materials[i % materials.length];
     const mesh = new THREE.Mesh(geo, mat);
 
-    const baseX = (Math.random() - 0.5) * 32; // span across width
-    const baseY = 15 - (i / 48) * 125;      // vertical span +15 down to -110
-    const baseZ = -4 - Math.random() * 12;   // depth position
+    const baseX = (Math.random() - 0.5) * 34; // span across screen width
+    const baseY = 20 - (i / 64) * 140;        // vertical span +20 down to -120
+    const baseZ = -2 - Math.random() * 8;     // close depth position for clear visibility
 
     mesh.position.set(baseX, baseY, baseZ);
     mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
 
-    const scale = 0.5 + Math.random() * 0.8;
+    const scale = 0.7 + Math.random() * 0.9;
     mesh.scale.set(scale, scale, scale);
 
     floatingElementsGroup.add(mesh);
@@ -250,10 +251,10 @@ function build3DObjects(scene) {
     backgroundFloatingElements.push({
       mesh,
       baseY,
-      speed: 0.5 + Math.random() * 1.2,
+      speed: 0.6 + Math.random() * 1.4,
       phase: Math.random() * Math.PI * 2,
-      rotSpeedX: (Math.random() - 0.5) * 0.015,
-      rotSpeedY: (Math.random() - 0.5) * 0.02
+      rotSpeedX: (Math.random() - 0.5) * 0.02,
+      rotSpeedY: (Math.random() - 0.5) * 0.025
     });
   }
 
