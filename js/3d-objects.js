@@ -168,4 +168,13 @@ function build3DObjects(scene) {
 
   scene.add(contactGroup);
   window.contactArtifactGroup = contactGroup;
+
+  // Export Materials Handles for Dynamic Light/Dark Theme Switching
+  window.threeMaterials = {
+    titaniumMaterial,
+    darkChromeMaterial,
+    glassRefractiveMat,
+    accentBlueEmissiveMat,
+    latticeWireframeMat
+  };
 }

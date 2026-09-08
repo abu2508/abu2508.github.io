@@ -63,6 +63,11 @@ function initThreeScene() {
   rimLight.position.set(6, 4, 6);
   scene.add(rimLight);
 
+  window.ambientLight = ambientLight;
+  window.keyLight = keyLight;
+  window.fillLight = fillLight;
+  window.rimLight = rimLight;
+
   // 5. Build 3D Geometries & Monogram Sculpture
   if (typeof build3DObjects === "function") {
     build3DObjects(scene);
@@ -166,6 +171,68 @@ function setThreeSceneTheme(theme) {
   const isLight = theme === "light";
   const fogColor = isLight ? 0xf8fafc : 0x10141E;
   scene.fog.color.setHex(fogColor);
+
+  if (window.keyLight) {
+    window.keyLight.color.setHex(isLight ? 0x0f172a : 0xffffff);
+    window.keyLight.intensity = isLight ? 2.5 : 1.8;
+  }
+  if (window.rimLight) {
+    window.rimLight.color.setHex(isLight ? 0x0284c7 : 0x38bdf8);
+    window.rimLight.intensity = isLight ? 3.5 : 2.5;
+  }
+  if (window.ambientLight) {
+    window.ambientLight.color.setHex(isLight ? 0xe2e8f0 : 0xf8fafc);
+    window.ambientLight.intensity = isLight ? 1.2 : 0.85;
+  }
+
+  if (window.threeMaterials) {
+    const { titaniumMaterial, darkChromeMaterial, glassRefractiveMat, accentBlueEmissiveMat, latticeWireframeMat } = window.threeMaterials;
+    if (isLight) {
+      if (titaniumMaterial) {
+        titaniumMaterial.color.setHex(0x1e293b); // Smoked Dark Titanium Slate for light mode
+        titaniumMaterial.metalness = 0.85;
+        titaniumMaterial.roughness = 0.2;
+      }
+      if (darkChromeMaterial) {
+        darkChromeMaterial.color.setHex(0x0f172a); // Deep Chrome Slate
+        darkChromeMaterial.metalness = 0.9;
+        darkChromeMaterial.roughness = 0.15;
+      }
+      if (glassRefractiveMat) {
+        glassRefractiveMat.color.setHex(0x0284c7); // Vibrant Sapphire Glass
+        glassRefractiveMat.opacity = 0.82;
+      }
+      if (accentBlueEmissiveMat) {
+        accentBlueEmissiveMat.color.setHex(0x0284c7);
+        accentBlueEmissiveMat.emissive.setHex(0x0369a1);
+      }
+      if (latticeWireframeMat) {
+        latticeWireframeMat.color.setHex(0x334155);
+      }
+    } else {
+      if (titaniumMaterial) {
+        titaniumMaterial.color.setHex(0xf1f5f9); // High-Polish Brushed Titanium Silver
+        titaniumMaterial.metalness = 0.96;
+        titaniumMaterial.roughness = 0.15;
+      }
+      if (darkChromeMaterial) {
+        darkChromeMaterial.color.setHex(0x1e293b);
+        darkChromeMaterial.metalness = 0.92;
+        darkChromeMaterial.roughness = 0.22;
+      }
+      if (glassRefractiveMat) {
+        glassRefractiveMat.color.setHex(0xffffff);
+        glassRefractiveMat.opacity = 0.88;
+      }
+      if (accentBlueEmissiveMat) {
+        accentBlueEmissiveMat.color.setHex(0x38bdf8);
+        accentBlueEmissiveMat.emissive.setHex(0x0284c7);
+      }
+      if (latticeWireframeMat) {
+        latticeWireframeMat.color.setHex(0xcbd5e1);
+      }
+    }
+  }
 
   if (renderer && camera) {
     renderer.render(scene, camera);
