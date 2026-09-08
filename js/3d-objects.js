@@ -110,17 +110,17 @@ function build3DObjects(scene) {
   // 2. ABOUT ARTIFACT GROUP: 3D METALLIC NEURAL LATTICE (y = -20)
   // --------------------------------------------------------------------------
   const aboutGroup = new THREE.Group();
-  aboutGroup.position.set(3.2, -20, -3);
+  aboutGroup.position.set(0, -20, -1);
 
-  const latticeGeometry = new THREE.IcosahedronGeometry(3.0, 1);
+  const latticeGeometry = new THREE.IcosahedronGeometry(3.6, 1);
   const latticeMesh = new THREE.Mesh(latticeGeometry, latticeWireframeMat);
   aboutGroup.add(latticeMesh);
 
-  const innerSolidGeo = new THREE.OctahedronGeometry(1.6, 2);
+  const innerSolidGeo = new THREE.OctahedronGeometry(2.0, 2);
   const innerSolidMesh = new THREE.Mesh(innerSolidGeo, darkChromeMaterial);
   aboutGroup.add(innerSolidMesh);
 
-  const aboutHaloGeo = new THREE.TorusGeometry(3.6, 0.06, 24, 100);
+  const aboutHaloGeo = new THREE.TorusGeometry(4.2, 0.08, 24, 100);
   const aboutHaloMesh = new THREE.Mesh(aboutHaloGeo, glassRefractiveMat);
   aboutHaloMesh.rotation.x = 1.1;
   aboutGroup.add(aboutHaloMesh);
@@ -132,17 +132,17 @@ function build3DObjects(scene) {
   // 3. EXPERIENCE ARTIFACT GROUP: ARCHITECTURAL FLOW TORUS KNOT (y = -40)
   // --------------------------------------------------------------------------
   const expGroup = new THREE.Group();
-  expGroup.position.set(-3.5, -40, -4);
+  expGroup.position.set(0, -40, -1);
 
-  const knotGeo = new THREE.TorusKnotGeometry(2.2, 0.4, 128, 32);
+  const knotGeo = new THREE.TorusKnotGeometry(2.8, 0.5, 128, 32);
   const knotMesh = new THREE.Mesh(knotGeo, titaniumMaterial);
   expGroup.add(knotMesh);
 
-  const expCoreGeo = new THREE.SphereGeometry(1.1, 32, 32);
+  const expCoreGeo = new THREE.SphereGeometry(1.4, 32, 32);
   const expCoreMesh = new THREE.Mesh(expCoreGeo, glassRefractiveMat);
   expGroup.add(expCoreMesh);
 
-  const expRingGeo = new THREE.TorusGeometry(3.8, 0.05, 24, 100);
+  const expRingGeo = new THREE.TorusGeometry(4.5, 0.07, 24, 100);
   const expRingMesh = new THREE.Mesh(expRingGeo, accentBlueEmissiveMat);
   expRingMesh.rotation.x = Math.PI / 3;
   expGroup.add(expRingMesh);
@@ -154,20 +154,31 @@ function build3DObjects(scene) {
   // 4. PROJECTS ARTIFACT GROUP: GEODESIC TECH CLUSTER (y = -60)
   // --------------------------------------------------------------------------
   const projGroup = new THREE.Group();
-  projGroup.position.set(3.5, -60, -4);
+  projGroup.position.set(0, -60, -1);
 
-  const dodecaGeo = new THREE.DodecahedronGeometry(2.4, 0);
+  const dodecaGeo = new THREE.DodecahedronGeometry(3.2, 0);
   const dodecaMesh = new THREE.Mesh(dodecaGeo, darkChromeMaterial);
   projGroup.add(dodecaMesh);
 
-  const innerGlassOcta = new THREE.OctahedronGeometry(1.6, 1);
+  const innerGlassOcta = new THREE.OctahedronGeometry(2.2, 1);
   const innerGlassMesh = new THREE.Mesh(innerGlassOcta, glassRefractiveMat);
   projGroup.add(innerGlassMesh);
 
-  const projHalo = new THREE.TorusGeometry(3.6, 0.07, 24, 100);
+  const projHalo = new THREE.TorusGeometry(4.8, 0.09, 24, 100);
   const projHaloMesh = new THREE.Mesh(projHalo, titaniumMaterial);
   projHaloMesh.rotation.y = 1.2;
   projGroup.add(projHaloMesh);
+
+  // Orbiting satellite tech spheres around Projects core
+  const projOrbitGroup = new THREE.Group();
+  for (let i = 0; i < 6; i++) {
+    const angle = (i / 6) * Math.PI * 2;
+    const satGeo = new THREE.OctahedronGeometry(0.4, 1);
+    const satMesh = new THREE.Mesh(satGeo, accentBlueEmissiveMat);
+    satMesh.position.set(Math.cos(angle) * 5.4, Math.sin(angle) * 2.2, Math.sin(angle) * 5.4);
+    projOrbitGroup.add(satMesh);
+  }
+  projGroup.add(projOrbitGroup);
 
   scene.add(projGroup);
   window.projectsArtifactGroup = projGroup;
@@ -176,19 +187,19 @@ function build3DObjects(scene) {
   // 5. SKILLS ARTIFACT GROUP: MATRIX DOUBLE HELIX RING (y = -78)
   // --------------------------------------------------------------------------
   const skillsGroup = new THREE.Group();
-  skillsGroup.position.set(-3.0, -78, -3);
+  skillsGroup.position.set(0, -78, -1);
 
-  const matrixRing1 = new THREE.TorusGeometry(2.8, 0.16, 32, 100);
+  const matrixRing1 = new THREE.TorusGeometry(3.8, 0.22, 32, 100);
   const matrixMesh1 = new THREE.Mesh(matrixRing1, titaniumMaterial);
   matrixMesh1.rotation.x = 1.1;
   skillsGroup.add(matrixMesh1);
 
-  const matrixRing2 = new THREE.TorusGeometry(2.4, 0.12, 32, 100);
+  const matrixRing2 = new THREE.TorusGeometry(3.2, 0.16, 32, 100);
   const matrixMesh2 = new THREE.Mesh(matrixRing2, glassRefractiveMat);
   matrixMesh2.rotation.y = 1.3;
   skillsGroup.add(matrixMesh2);
 
-  const skillsCoreGeo = new THREE.IcosahedronGeometry(1.2, 0);
+  const skillsCoreGeo = new THREE.IcosahedronGeometry(1.6, 0);
   const skillsCoreMesh = new THREE.Mesh(skillsCoreGeo, accentBlueEmissiveMat);
   skillsGroup.add(skillsCoreMesh);
 
@@ -199,13 +210,13 @@ function build3DObjects(scene) {
   // 6. CONTACT ARTIFACT GROUP: METALLIC CHROME RING (y = -95)
   // --------------------------------------------------------------------------
   const contactGroup = new THREE.Group();
-  contactGroup.position.set(0, -95, -3);
+  contactGroup.position.set(0, -95, 0);
 
-  const ringGeometry = new THREE.TorusGeometry(3.2, 0.28, 32, 100);
+  const ringGeometry = new THREE.TorusGeometry(4.2, 0.35, 32, 100);
   const ringMesh = new THREE.Mesh(ringGeometry, titaniumMaterial);
   contactGroup.add(ringMesh);
 
-  const contactInnerCore = new THREE.SphereGeometry(1.4, 32, 32);
+  const contactInnerCore = new THREE.SphereGeometry(1.8, 32, 32);
   const contactCoreMesh = new THREE.Mesh(contactInnerCore, glassRefractiveMat);
   contactGroup.add(contactCoreMesh);
 
@@ -213,37 +224,37 @@ function build3DObjects(scene) {
   window.contactArtifactGroup = contactGroup;
 
   // --------------------------------------------------------------------------
-  // 7. CONTINUOUS FLOATING BACKGROUND 3D OBJECTS ARRAY (y = +20 to y = -120)
+  // 7. CONTINUOUS FLOATING BACKGROUND 3D OBJECTS ARRAY (y = +22 to y = -125)
   // --------------------------------------------------------------------------
   const floatingElementsGroup = new THREE.Group();
   const backgroundFloatingElements = [];
 
   const geometries = [
-    new THREE.SphereGeometry(0.45, 16, 16),
-    new THREE.BoxGeometry(0.6, 0.6, 0.6),
-    new THREE.OctahedronGeometry(0.55, 1),
-    new THREE.TorusGeometry(0.55, 0.14, 16, 32),
-    new THREE.TetrahedronGeometry(0.5, 0),
-    new THREE.DodecahedronGeometry(0.45, 0),
-    new THREE.IcosahedronGeometry(0.5, 0)
+    new THREE.SphereGeometry(0.55, 16, 16),
+    new THREE.BoxGeometry(0.7, 0.7, 0.7),
+    new THREE.OctahedronGeometry(0.65, 1),
+    new THREE.TorusGeometry(0.65, 0.16, 16, 32),
+    new THREE.TetrahedronGeometry(0.6, 0),
+    new THREE.DodecahedronGeometry(0.55, 0),
+    new THREE.IcosahedronGeometry(0.6, 0)
   ];
 
   const materials = [titaniumMaterial, darkChromeMaterial, glassRefractiveMat, accentBlueEmissiveMat, latticeWireframeMat];
 
-  // Distribute 64 floating objects along the vertical axis from y = 20 down to y = -120
-  for (let i = 0; i < 64; i++) {
+  // Distribute 72 floating 3D objects along the vertical axis from y = 22 down to y = -125
+  for (let i = 0; i < 72; i++) {
     const geo = geometries[i % geometries.length];
     const mat = materials[i % materials.length];
     const mesh = new THREE.Mesh(geo, mat);
 
-    const baseX = (Math.random() - 0.5) * 34; // span across screen width
-    const baseY = 20 - (i / 64) * 140;        // vertical span +20 down to -120
-    const baseZ = -2 - Math.random() * 8;     // close depth position for clear visibility
+    const baseX = (Math.random() - 0.5) * 26; // span across visible viewport
+    const baseY = 22 - (i / 72) * 147;        // vertical span +22 down to -125
+    const baseZ = 0 - Math.random() * 6;      // close depth position for vivid visibility
 
     mesh.position.set(baseX, baseY, baseZ);
     mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
 
-    const scale = 0.7 + Math.random() * 0.9;
+    const scale = 0.8 + Math.random() * 1.1;
     mesh.scale.set(scale, scale, scale);
 
     floatingElementsGroup.add(mesh);

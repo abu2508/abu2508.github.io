@@ -6,11 +6,11 @@
 // Target Camera Positions for Page Sections
 const CAMERA_SECTIONS_CONFIG = {
   "hero": { pos: { x: 0, y: 0, z: 18 }, lookAt: { x: 0, y: 0, z: 0 } },
-  "about": { pos: { x: -3, y: -25, z: 16 }, lookAt: { x: 0, y: -25, z: -5 } },
-  "experience": { pos: { x: 4, y: -45, z: 17 }, lookAt: { x: 0, y: -45, z: 0 } },
-  "projects": { pos: { x: 0, y: -65, z: 20 }, lookAt: { x: 0, y: -65, z: 0 } },
-  "skills": { pos: { x: -2, y: -80, z: 15 }, lookAt: { x: 0, y: -80, z: -8 } },
-  "contact": { pos: { x: 0, y: -95, z: 14 }, lookAt: { x: 0, y: -95, z: -3 } }
+  "about": { pos: { x: 0, y: -20, z: 16 }, lookAt: { x: 0, y: -20, z: -2 } },
+  "experience": { pos: { x: 0, y: -40, z: 17 }, lookAt: { x: 0, y: -40, z: 0 } },
+  "projects": { pos: { x: 0, y: -60, z: 18 }, lookAt: { x: 0, y: -60, z: 0 } },
+  "skills": { pos: { x: 0, y: -78, z: 16 }, lookAt: { x: 0, y: -78, z: 0 } },
+  "contact": { pos: { x: 0, y: -95, z: 15 }, lookAt: { x: 0, y: -95, z: 0 } }
 };
 
 let currentSectionKey = "hero";
