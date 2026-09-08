@@ -82,7 +82,7 @@ function initThreeScene() {
       isRenderingActive = false;
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
     } else {
-      if (!prefersReducedMotion && !isRenderingActive) {
+      if (!isRenderingActive) {
         isRenderingActive = true;
         clock.start();
         animateThreeScene();
@@ -90,12 +90,9 @@ function initThreeScene() {
     }
   });
 
-  // 7. Start Render Loop if Reduced Motion is disabled
-  if (prefersReducedMotion) {
-    renderer.render(scene, camera);
-  } else {
-    animateThreeScene();
-  }
+  // 7. Start Render Loop Engine
+  isRenderingActive = true;
+  animateThreeScene();
 }
 
 function onMouseMove(event) {
