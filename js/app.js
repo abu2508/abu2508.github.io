@@ -34,46 +34,6 @@ function togglePortfolioTheme() {
 window.updateThemeUI = updateThemeUI;
 window.togglePortfolioTheme = togglePortfolioTheme;
 
-// --------------------------------------------------------------------------
-// LIQUID GLASS MOUSE CURSOR & SHEEN TRACKING ENGINE
-// --------------------------------------------------------------------------
-let mousePos = { x: -100, y: -100 };
-let followerPos = { x: -100, y: -100 };
-
-document.addEventListener("mousemove", (e) => {
-  mousePos.x = e.clientX;
-  mousePos.y = e.clientY;
-});
-
-function animateLiquidCursor() {
-  const cursorDot = document.getElementById("liquid-cursor-dot");
-  const cursorFollower = document.getElementById("liquid-cursor-follower");
-
-  if (cursorDot && cursorFollower) {
-    cursorDot.style.transform = `translate3d(${mousePos.x}px, ${mousePos.y}px, 0)`;
-
-    followerPos.x += (mousePos.x - followerPos.x) * 0.18;
-    followerPos.y += (mousePos.y - followerPos.y) * 0.18;
-
-    cursorFollower.style.transform = `translate3d(${followerPos.x}px, ${followerPos.y}px, 0)`;
-  }
-  requestAnimationFrame(animateLiquidCursor);
-}
-requestAnimationFrame(animateLiquidCursor);
-
-// Hover state delegation for liquid glass follower scale-up
-document.addEventListener("mouseover", (e) => {
-  if (e.target.closest("a, button, .glass-card, .project-product-card, .tech-group-card, .bento-card, .stat-glass-card, .tech-chip, .tech-badge-chip, .monogram-sculpture-wrap")) {
-    document.body.classList.add("cursor-hover");
-  }
-});
-
-document.addEventListener("mouseout", (e) => {
-  if (e.target.closest("a, button, .glass-card, .project-product-card, .tech-group-card, .bento-card, .stat-glass-card, .tech-chip, .tech-badge-chip, .monogram-sculpture-wrap")) {
-    document.body.classList.remove("cursor-hover");
-  }
-});
-
 function initApp() {
   const themeToggleBtn = document.getElementById("themeToggleBtn");
   const initialTheme = document.documentElement.getAttribute("data-theme") || "dark";
