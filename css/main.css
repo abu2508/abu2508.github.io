@@ -6,7 +6,7 @@
    ========================================================================== */
 
 :root {
-  /* Twilight / Soft-Dark Graphite Palette (NO PURE BLACK #000000) */
+  /* Twilight / Soft-Dark Graphite Palette (DEFAULT DARK) */
   --bg-twilight: #10141E;
   --bg-surface: #161B26;
   --bg-surface-elevated: #1E2536;
@@ -25,7 +25,7 @@
   --metal-silver: #CBD5E1;
   --metal-dark-chrome: #64748B;
 
-  /* Restrained Studio Studio Accents (NO NEON) */
+  /* Restrained Studio Accents */
   --accent-blue-soft: #38BDF8;
   --accent-blue-glow: rgba(56, 189, 248, 0.15);
   --accent-violet-soft: #818CF8;
@@ -54,6 +54,40 @@
   --shadow-studio: 0 10px 30px rgba(0, 0, 0, 0.3);
 
   --max-width: 1280px;
+}
+
+/* ==========================================================================
+   LIGHT THEME OVERRIDES (STUDIO DAYLIGHT / ARCHITECTURAL TITANIUM)
+   ========================================================================== */
+[data-theme="light"] {
+  --bg-twilight: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #F1F5F9;
+  --bg-card: rgba(255, 255, 255, 0.82);
+  --bg-card-hover: rgba(248, 250, 252, 0.95);
+  --bg-glass-capsule: rgba(255, 255, 255, 0.88);
+
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --text-dim: #94A3B8;
+
+  --metal-titanium: #1E293B;
+  --metal-silver: #475569;
+  --metal-dark-chrome: #94A3B8;
+
+  --accent-blue-soft: #0284C7;
+  --accent-blue-glow: rgba(2, 132, 199, 0.12);
+  --accent-violet-soft: #6366F1;
+  --accent-violet-glow: rgba(99, 102, 241, 0.12);
+  --accent-emerald: #059669;
+
+  --border-glass: rgba(15, 23, 42, 0.08);
+  --border-glass-bright: rgba(15, 23, 42, 0.16);
+  --border-titanium: rgba(15, 23, 42, 0.18);
+
+  --shadow-card: 0 20px 45px rgba(15, 23, 42, 0.07);
+  --shadow-studio: 0 10px 30px rgba(15, 23, 42, 0.05);
 }
 
 /* Global Reset */

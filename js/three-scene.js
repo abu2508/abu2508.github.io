@@ -126,6 +126,12 @@ function animateThreeScene() {
     window.heroArtifactGroup.position.y = Math.sin(elapsedTime * 0.7) * 0.25;
   }
 
+  // Orbit Tech Nodes around the "A" Monogram
+  if (window.orbitingTechNodesGroup) {
+    window.orbitingTechNodesGroup.rotation.y = elapsedTime * 0.35;
+    window.orbitingTechNodesGroup.rotation.x = Math.sin(elapsedTime * 0.3) * 0.15;
+  }
+
   // Rotate About Geometric Lattice
   if (window.aboutArtifactGroup) {
     window.aboutArtifactGroup.rotation.y = elapsedTime * 0.12;
@@ -152,8 +158,22 @@ function animateThreeScene() {
   renderer.render(scene, camera);
 }
 
+function setThreeSceneTheme(theme) {
+  if (!scene || !scene.fog) return;
+  const isLight = theme === "light";
+  const fogColor = isLight ? 0xf8fafc : 0x10141E;
+  scene.fog.color.setHex(fogColor);
+
+  if (renderer && camera) {
+    renderer.render(scene, camera);
+  }
+}
+window.setThreeSceneTheme = setThreeSceneTheme;
+
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof THREE !== "undefined") {
     initThreeScene();
+    const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
+    setThreeSceneTheme(currentTheme);
   }
 });

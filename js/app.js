@@ -3,6 +3,41 @@
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+  // 0. Theme Controller (Light / Dark Studio Switcher)
+  const themeToggleBtn = document.getElementById("themeToggleBtn");
+  const sunIcon = themeToggleBtn ? themeToggleBtn.querySelector(".theme-icon-sun") : null;
+  const moonIcon = themeToggleBtn ? themeToggleBtn.querySelector(".theme-icon-moon") : null;
+
+  function updateThemeUI(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    if (sunIcon && moonIcon) {
+      if (theme === "light") {
+        sunIcon.style.display = "none";
+        moonIcon.style.display = "block";
+      } else {
+        sunIcon.style.display = "block";
+        moonIcon.style.display = "none";
+      }
+    }
+    if (themeToggleBtn) {
+      themeToggleBtn.setAttribute("aria-label", `Switch to ${theme === "light" ? "dark" : "light"} theme`);
+    }
+    if (typeof window.setThreeSceneTheme === "function") {
+      window.setThreeSceneTheme(theme);
+    }
+  }
+
+  const initialTheme = document.documentElement.getAttribute("data-theme") || "dark";
+  updateThemeUI(initialTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+      localStorage.setItem("portfolio-theme", current);
+      updateThemeUI(current);
+    });
+  }
+
   // 1. Intersection Observer for Scroll Reveals
   const revealElements = document.querySelectorAll(".cinematic-reveal");
   const observerOptions = {
