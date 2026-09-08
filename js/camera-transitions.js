@@ -46,8 +46,7 @@ function updateCameraPosition() {
   camera.lookAt(currentCamLook.x, currentCamLook.y, currentCamLook.z);
 }
 
-// Scroll Observer to Trigger 3D Camera Section Shifts
-document.addEventListener("DOMContentLoaded", () => {
+function initCameraTransitions() {
   const sections = document.querySelectorAll("section[id], header[id]");
 
   const observerOptions = {
@@ -68,4 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }, observerOptions);
 
   sections.forEach((sec) => cameraSectionObserver.observe(sec));
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCameraTransitions);
+} else {
+  initCameraTransitions();
+}

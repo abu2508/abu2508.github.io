@@ -122,7 +122,7 @@ function animateThreeScene() {
   // Rotate Hero Metallic Monogram Sculpture
   if (window.heroArtifactGroup) {
     const isMobile = window.innerWidth <= 992;
-    const targetX = isMobile ? 0 : (window.innerWidth < 1400 ? 2.8 : 3.6);
+    const targetX = isMobile ? 0 : (window.innerWidth < 1200 ? 1.8 : 2.6);
     window.heroArtifactGroup.position.x = targetX;
     window.heroArtifactGroup.rotation.y = elapsedTime * 0.18 + mouseX * 0.35;
     window.heroArtifactGroup.rotation.x = Math.sin(elapsedTime * 0.25) * 0.08 + mouseY * 0.25;
@@ -173,10 +173,17 @@ function setThreeSceneTheme(theme) {
 }
 window.setThreeSceneTheme = setThreeSceneTheme;
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (typeof THREE !== "undefined") {
+function safeInitThree() {
+  if (typeof THREE !== "undefined" && !scene) {
     initThreeScene();
     const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
     setThreeSceneTheme(currentTheme);
   }
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", safeInitThree);
+} else {
+  safeInitThree();
+}
+window.addEventListener("load", safeInitThree);

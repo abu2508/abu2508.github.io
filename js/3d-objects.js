@@ -41,7 +41,7 @@ function build3DObjects(scene) {
   // Architectural 3D structure derived from the letter A
   // --------------------------------------------------------------------------
   const heroGroup = new THREE.Group();
-  heroGroup.position.set(3.2, 0, 0);
+  heroGroup.position.set(2.2, 0, 0);
 
   // Structural Legs of the "A" Monogram (64-segment ultra-smooth polished pillars)
   const pillarGeo = new THREE.CylinderGeometry(0.3, 0.44, 5.0, 64);

@@ -2,43 +2,48 @@
    ABDULLAH B (ABU) — MAIN APPLICATION & NAVIGATION ORCHESTRATOR
    ========================================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
-  // 0. Theme Controller (Light / Dark Studio Switcher)
-  const themeToggleBtn = document.getElementById("themeToggleBtn");
+function updateThemeUI(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  const sunIcon = document.querySelector(".theme-icon-sun");
+  const moonIcon = document.querySelector(".theme-icon-moon");
 
-  function updateThemeUI(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    const sunIcon = document.querySelector(".theme-icon-sun");
-    const moonIcon = document.querySelector(".theme-icon-moon");
-
-    if (sunIcon && moonIcon) {
-      if (theme === "light") {
-        sunIcon.style.display = "none";
-        moonIcon.style.display = "inline-block";
-      } else {
-        sunIcon.style.display = "inline-block";
-        moonIcon.style.display = "none";
-      }
-    }
-    if (themeToggleBtn) {
-      themeToggleBtn.setAttribute("aria-label", `Switch to ${theme === "light" ? "dark" : "light"} theme`);
-    }
-    if (typeof window.setThreeSceneTheme === "function") {
-      window.setThreeSceneTheme(theme);
+  if (sunIcon && moonIcon) {
+    if (theme === "light") {
+      sunIcon.style.display = "none";
+      moonIcon.style.display = "inline-block";
+    } else {
+      sunIcon.style.display = "inline-block";
+      moonIcon.style.display = "none";
     }
   }
+  const themeToggleBtn = document.getElementById("themeToggleBtn");
+  if (themeToggleBtn) {
+    themeToggleBtn.setAttribute("aria-label", `Switch to ${theme === "light" ? "dark" : "light"} theme`);
+  }
+  if (typeof window.setThreeSceneTheme === "function") {
+    window.setThreeSceneTheme(theme);
+  }
+}
 
+function togglePortfolioTheme() {
+  const current = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+  localStorage.setItem("portfolio-theme", current);
+  updateThemeUI(current);
+}
+
+window.updateThemeUI = updateThemeUI;
+window.togglePortfolioTheme = togglePortfolioTheme;
+
+function initApp() {
+  const themeToggleBtn = document.getElementById("themeToggleBtn");
   const initialTheme = document.documentElement.getAttribute("data-theme") || "dark";
   updateThemeUI(initialTheme);
 
   if (themeToggleBtn) {
-    themeToggleBtn.addEventListener("click", (e) => {
+    themeToggleBtn.onclick = (e) => {
       e.preventDefault();
-      e.stopPropagation();
-      const current = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
-      localStorage.setItem("portfolio-theme", current);
-      updateThemeUI(current);
-    });
+      togglePortfolioTheme();
+    };
   }
 
   // 1. Intersection Observer for Scroll Reveals
@@ -59,6 +64,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }, observerOptions);
 
   revealElements.forEach((el) => revealObserver.observe(el));
+
+  // Immediate visibility fallback for Hero elements
+  document.querySelectorAll("#hero .cinematic-reveal").forEach(el => {
+    el.classList.add("is-visible");
+  });
 
   // 2. Active Scroll Spy for Navbar Capsule Links
   const navLinks = document.querySelectorAll(".nav-capsule-link");
@@ -120,4 +130,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initApp);
+} else {
+  initApp();
+}
+window.addEventListener("load", initApp);

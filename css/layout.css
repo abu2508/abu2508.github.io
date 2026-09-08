@@ -132,6 +132,10 @@
   padding: 0;
 }
 
+.theme-toggle-btn svg {
+  pointer-events: none;
+}
+
 .theme-toggle-btn:hover {
   background: rgba(255, 255, 255, 0.16);
   border-color: var(--accent-blue-soft);

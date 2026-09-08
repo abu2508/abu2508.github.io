@@ -2,8 +2,7 @@
    ABDULLAH B — ANIMATIONS & INTERACTION ENGINE
    ========================================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Intersection Observer for Scroll Reveals
+function initAnimations() {
   const revealElements = document.querySelectorAll(".reveal-on-scroll");
 
   const observerOptions = {
@@ -23,10 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   revealElements.forEach(el => revealObserver.observe(el));
 
-  // Subtle Card Tilt Micro-Interaction (Mouse movement)
   const tiltCards = document.querySelectorAll(".case-card, .featured-case-card");
-  
-  // Check if reduced motion is preferred
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (!prefersReducedMotion) {
@@ -48,4 +44,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initAnimations);
+} else {
+  initAnimations();
+}

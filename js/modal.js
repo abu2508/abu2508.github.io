@@ -242,7 +242,7 @@ function closeCaseStudyModal() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function initModalEvents() {
   const modalOverlay = document.getElementById("caseStudyModal");
   const modalCloseBtn = document.getElementById("modalCloseBtn");
 
@@ -285,4 +285,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initModalEvents);
+} else {
+  initModalEvents();
+}

@@ -214,3 +214,9 @@ a {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+[data-theme="light"] .gradient-text-metal {
+  background: linear-gradient(135deg, #0F172A 0%, #334155 50%, #475569 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
