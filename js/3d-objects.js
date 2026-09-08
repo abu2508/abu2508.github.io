@@ -4,36 +4,33 @@
    ========================================================================== */
 
 function build3DObjects(scene) {
-  // PBR Metallic Materials (High-Polish Studio Titanium & Chrome)
+  // PBR Metallic Materials (High-Contrast Titanium, Dark Chrome & Cyan Glass)
   const titaniumMaterial = new THREE.MeshStandardMaterial({
-    color: 0xf1f5f9,
-    metalness: 0.96,
-    roughness: 0.15,
-    envMapIntensity: 1.5
-  });
-
-  const darkChromeMaterial = new THREE.MeshStandardMaterial({
-    color: 0x1e293b,
-    metalness: 0.92,
+    color: 0xCBD5E1,
+    metalness: 0.82,
     roughness: 0.22
   });
 
-  const glassRefractiveMat = new THREE.MeshPhysicalMaterial({
-    color: 0xffffff,
-    metalness: 0.08,
-    roughness: 0.1,
-    transmission: 0.92,
-    thickness: 1.8,
+  const darkChromeMaterial = new THREE.MeshStandardMaterial({
+    color: 0x334155,
+    metalness: 0.88,
+    roughness: 0.25
+  });
+
+  const glassRefractiveMat = new THREE.MeshStandardMaterial({
+    color: 0x38BDF8,
+    metalness: 0.35,
+    roughness: 0.2,
     transparent: true,
-    opacity: 0.88
+    opacity: 0.8
   });
 
   const accentBlueEmissiveMat = new THREE.MeshStandardMaterial({
-    color: 0x38bdf8,
-    emissive: 0x0284c7,
-    emissiveIntensity: 0.6,
-    metalness: 0.7,
-    roughness: 0.18
+    color: 0x38BDF8,
+    emissive: 0x0284C7,
+    emissiveIntensity: 0.95,
+    metalness: 0.5,
+    roughness: 0.2
   });
 
   // --------------------------------------------------------------------------

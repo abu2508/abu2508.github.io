@@ -127,11 +127,18 @@ function animateThreeScene() {
   // Rotate Hero Metallic Monogram Sculpture
   if (window.heroArtifactGroup) {
     const isMobile = window.innerWidth <= 992;
-    const targetX = isMobile ? 0 : (window.innerWidth < 1200 ? 1.8 : 2.6);
-    window.heroArtifactGroup.position.x = targetX;
+    if (isMobile) {
+      window.heroArtifactGroup.position.x = 0;
+      window.heroArtifactGroup.position.y = -1.2;
+      window.heroArtifactGroup.scale.set(0.75, 0.75, 0.75);
+    } else {
+      const targetX = window.innerWidth < 1400 ? 2.8 : 3.6;
+      window.heroArtifactGroup.position.x = targetX;
+      window.heroArtifactGroup.position.y = Math.sin(elapsedTime * 0.7) * 0.25;
+      window.heroArtifactGroup.scale.set(1.1, 1.1, 1.1);
+    }
     window.heroArtifactGroup.rotation.y = elapsedTime * 0.18 + mouseX * 0.35;
     window.heroArtifactGroup.rotation.x = Math.sin(elapsedTime * 0.25) * 0.08 + mouseY * 0.25;
-    window.heroArtifactGroup.position.y = Math.sin(elapsedTime * 0.7) * 0.25;
   }
 
   // Orbit Tech Nodes around the "A" Monogram
