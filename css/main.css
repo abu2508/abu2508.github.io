@@ -285,3 +285,74 @@ a {
   border-color: rgba(15, 23, 42, 0.15);
   color: #334155;
 }
+
+/* ==========================================================================
+   LIQUID GLASS MOUSE CURSOR & GLOW SYSTEM
+   ========================================================================== */
+#liquid-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--accent-blue-soft, #38bdf8);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate3d(-50%, -50%, 0);
+  transition: transform 0.05s ease, opacity 0.3s ease, background 0.3s ease;
+  box-shadow: 0 0 14px var(--accent-blue-soft, #38bdf8);
+}
+
+#liquid-cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(56, 189, 248, 0.5);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(255, 255, 255, 0.02) 70%, transparent 100%);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate3d(-50%, -50%, 0);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              background 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+body.cursor-hover #liquid-cursor-follower {
+  width: 68px;
+  height: 68px;
+  border-color: rgba(56, 189, 248, 0.85);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(2, 132, 199, 0.1) 65%, transparent 100%);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
+  box-shadow: 0 0 32px rgba(56, 189, 248, 0.4);
+}
+
+body.cursor-hover #liquid-cursor-dot {
+  transform: translate3d(-50%, -50%, 0) scale(1.8);
+  background: #ffffff;
+  box-shadow: 0 0 20px #ffffff;
+}
+
+[data-theme="light"] #liquid-cursor-dot {
+  background: #0284c7;
+  box-shadow: 0 0 14px rgba(2, 132, 199, 0.6);
+}
+
+[data-theme="light"] #liquid-cursor-follower {
+  border-color: rgba(2, 132, 199, 0.5);
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.12) 0%, rgba(2, 132, 199, 0.02) 70%, transparent 100%);
+}
+
+@media (pointer: coarse), (max-width: 992px) {
+  #liquid-cursor-dot, #liquid-cursor-follower {
+    display: none !important;
+  }
+}

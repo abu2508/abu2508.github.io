@@ -172,26 +172,53 @@ function animateThreeScene() {
 
   // Rotate About Geometric Lattice
   if (window.aboutArtifactGroup) {
-    window.aboutArtifactGroup.rotation.y = elapsedTime * 0.12;
+    window.aboutArtifactGroup.rotation.y = elapsedTime * 0.14 + mouseX * 0.2;
     window.aboutArtifactGroup.rotation.z = Math.cos(elapsedTime * 0.18) * 0.12;
-    window.aboutArtifactGroup.position.x = mouseX * 0.6;
+    window.aboutArtifactGroup.position.x = 3.2 + mouseX * 0.4;
+  }
+
+  // Rotate Experience Torus Knot Architectural Flow
+  if (window.experienceArtifactGroup) {
+    window.experienceArtifactGroup.rotation.x = elapsedTime * 0.18 + mouseY * 0.2;
+    window.experienceArtifactGroup.rotation.y = elapsedTime * 0.22 + mouseX * 0.2;
+  }
+
+  // Rotate Projects Geodesic Tech Cluster
+  if (window.projectsArtifactGroup) {
+    window.projectsArtifactGroup.rotation.y = elapsedTime * 0.16 + mouseX * 0.25;
+    window.projectsArtifactGroup.rotation.z = Math.sin(elapsedTime * 0.12) * 0.15;
+  }
+
+  // Rotate Skills Helix Matrix
+  if (window.skillsArtifactGroup) {
+    window.skillsArtifactGroup.rotation.x = elapsedTime * 0.15;
+    window.skillsArtifactGroup.rotation.y = elapsedTime * 0.2 + mouseX * 0.2;
   }
 
   // Rotate Contact Metallic Ring
   if (window.contactArtifactGroup) {
-    window.contactArtifactGroup.rotation.x = elapsedTime * 0.2;
-    window.contactArtifactGroup.rotation.y = elapsedTime * 0.3;
+    window.contactArtifactGroup.rotation.x = elapsedTime * 0.2 + mouseY * 0.15;
+    window.contactArtifactGroup.rotation.y = elapsedTime * 0.3 + mouseX * 0.2;
   }
 
-  // Rotate Spatial Tech Node Universe
-  if (window.spatialTechGroup) {
-    window.spatialTechGroup.rotation.y = elapsedTime * 0.04 + mouseX * 0.15;
+  // Animate 48 Floating Background 3D Elements across all scroll sections
+  if (window.backgroundFloatingElements && Array.isArray(window.backgroundFloatingElements)) {
+    for (let i = 0; i < window.backgroundFloatingElements.length; i++) {
+      const elem = window.backgroundFloatingElements[i];
+      if (elem && elem.mesh) {
+        elem.mesh.position.y = elem.baseY + Math.sin(elapsedTime * elem.speed + elem.phase) * 0.5;
+        elem.mesh.rotation.x += elem.rotSpeedX;
+        elem.mesh.rotation.y += elem.rotSpeedY;
+        // Subtle mouse parallax reaction
+        elem.mesh.position.x += ((mouseX * (10 + (i % 5) * 4)) - elem.mesh.position.x) * 0.002;
+      }
+    }
   }
 
   // Rotate Particle Constellation Swarm
   if (window.particleSystem) {
-    window.particleSystem.rotation.y = elapsedTime * 0.02 + mouseX * 0.1;
-    window.particleSystem.rotation.x = Math.sin(elapsedTime * 0.03) * 0.05 + mouseY * 0.05;
+    window.particleSystem.rotation.y = elapsedTime * 0.02 + mouseX * 0.12;
+    window.particleSystem.rotation.x = Math.sin(elapsedTime * 0.03) * 0.05 + mouseY * 0.08;
   }
 
   // Camera Position Updates

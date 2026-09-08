@@ -34,6 +34,46 @@ function togglePortfolioTheme() {
 window.updateThemeUI = updateThemeUI;
 window.togglePortfolioTheme = togglePortfolioTheme;
 
+// --------------------------------------------------------------------------
+// LIQUID GLASS MOUSE CURSOR & SHEEN TRACKING ENGINE
+// --------------------------------------------------------------------------
+let mousePos = { x: -100, y: -100 };
+let followerPos = { x: -100, y: -100 };
+
+document.addEventListener("mousemove", (e) => {
+  mousePos.x = e.clientX;
+  mousePos.y = e.clientY;
+});
+
+function animateLiquidCursor() {
+  const cursorDot = document.getElementById("liquid-cursor-dot");
+  const cursorFollower = document.getElementById("liquid-cursor-follower");
+
+  if (cursorDot && cursorFollower) {
+    cursorDot.style.transform = `translate3d(${mousePos.x}px, ${mousePos.y}px, 0)`;
+
+    followerPos.x += (mousePos.x - followerPos.x) * 0.18;
+    followerPos.y += (mousePos.y - followerPos.y) * 0.18;
+
+    cursorFollower.style.transform = `translate3d(${followerPos.x}px, ${followerPos.y}px, 0)`;
+  }
+  requestAnimationFrame(animateLiquidCursor);
+}
+requestAnimationFrame(animateLiquidCursor);
+
+// Hover state delegation for liquid glass follower scale-up
+document.addEventListener("mouseover", (e) => {
+  if (e.target.closest("a, button, .glass-card, .project-product-card, .tech-group-card, .bento-card, .stat-glass-card, .tech-chip, .tech-badge-chip, .monogram-sculpture-wrap")) {
+    document.body.classList.add("cursor-hover");
+  }
+});
+
+document.addEventListener("mouseout", (e) => {
+  if (e.target.closest("a, button, .glass-card, .project-product-card, .tech-group-card, .bento-card, .stat-glass-card, .tech-chip, .tech-badge-chip, .monogram-sculpture-wrap")) {
+    document.body.classList.remove("cursor-hover");
+  }
+});
+
 function initApp() {
   const themeToggleBtn = document.getElementById("themeToggleBtn");
   const initialTheme = document.documentElement.getAttribute("data-theme") || "dark";
@@ -106,7 +146,7 @@ function initApp() {
     });
   }
 
-  // 4. 3D Monogram & Card Perspective Tilt Micro-Interactions (Fine Pointer / Mouse Only)
+  // 4. Hero Monogram Interactive 3D Parallax Tilt
   const heroMonogram = document.getElementById("heroMonogramSculpture");
   const heroSection = document.getElementById("hero");
   if (heroMonogram && heroSection) {
@@ -126,29 +166,32 @@ function initApp() {
     });
   }
 
-  const cards3D = document.querySelectorAll(".project-product-card, .experience-panel, .tech-group-card");
+  // 5. Dynamic Apple Liquid Glass Card Sheen & 3D Tilt
+  const glassCards = document.querySelectorAll(".project-product-card, .tech-group-card, .bento-card, .stat-glass-card, .glass-card");
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;
 
-  if (!prefersReducedMotion && isFinePointer) {
-    cards3D.forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+  glassCards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty("--card-mouse-x", `${x}px`);
+      card.style.setProperty("--card-mouse-y", `${y}px`);
+
+      if (!prefersReducedMotion && isFinePointer) {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -4;
-        const rotateY = ((x - centerX) / centerX) * 4;
-
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-      });
-
-      card.addEventListener("mouseleave", () => {
-        card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
-      });
+        const rotateX = ((y - centerY) / centerY) * -5;
+        const rotateY = ((x - centerX) / centerX) * 5;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale3d(1.015, 1.015, 1.015)`;
+      }
     });
-  }
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)";
+    });
+  });
 }
 
 if (document.readyState === "loading") {

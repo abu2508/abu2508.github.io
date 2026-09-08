@@ -31,25 +31,45 @@
   margin-top: 36px;
 }
 
-.project-product-card {
+.project-product-card, .tech-group-card, .bento-card, .stat-glass-card {
   background: var(--bg-card);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-xl);
   padding: 32px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              background 0.3s ease,
+              box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-card);
+  will-change: transform;
 }
 
-.project-product-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--border-glass-bright);
+.project-product-card::after, .tech-group-card::after, .bento-card::after, .stat-glass-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(600px circle at var(--card-mouse-x, 50%) var(--card-mouse-y, 50%), rgba(56, 189, 248, 0.18), transparent 45%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 1;
+}
+
+.project-product-card:hover::after, .tech-group-card:hover::after, .bento-card:hover::after, .stat-glass-card:hover::after {
+  opacity: 1;
+}
+
+.project-product-card:hover, .tech-group-card:hover, .bento-card:hover, .stat-glass-card:hover {
+  border-color: rgba(56, 189, 248, 0.45);
   background: var(--bg-card-hover);
-  box-shadow: var(--shadow-card), var(--accent-blue-glow);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45), 0 0 24px rgba(56, 189, 248, 0.2);
 }
 
 .project-category-tag {
