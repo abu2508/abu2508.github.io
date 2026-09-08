@@ -359,22 +359,24 @@
 }
 
 .monogram-pillar-left {
-  left: 65px;
-  transform: rotate(-18deg);
+  left: 104px;
+  transform-origin: top center;
+  transform: rotate(15deg);
   background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 30%, #94A3B8 70%, #475569 100%);
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .monogram-pillar-right {
-  right: 65px;
-  transform: rotate(18deg);
+  right: 104px;
+  transform-origin: top center;
+  transform: rotate(-15deg);
   background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 30%, #94A3B8 70%, #475569 100%);
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .monogram-crossbar {
   position: absolute;
-  top: 170px;
+  top: 155px;
   left: 45px;
   width: 150px;
   height: 24px;
@@ -387,7 +389,7 @@
 
 .monogram-apex-ring {
   position: absolute;
-  top: 12px;
+  top: 8px;
   left: 95px;
   width: 50px;
   height: 50px;
@@ -401,7 +403,7 @@
 /* Glowing Sapphire Core */
 .monogram-core-nucleus {
   position: absolute;
-  top: 128px;
+  top: 110px;
   left: 95px;
   width: 50px;
   height: 50px;
@@ -488,13 +490,141 @@
   color: var(--accent-blue-soft);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   animation: float-node 4s ease-in-out infinite alternate;
+  white-space: nowrap;
 }
 
-.orbit-node.node-1 { top: 10px; left: -30px; animation-delay: 0s; }
-.orbit-node.node-2 { top: 120px; right: -35px; animation-delay: 0.8s; }
-.orbit-node.node-3 { bottom: 20px; left: -25px; animation-delay: 1.6s; }
-.orbit-node.node-4 { bottom: 10px; right: -20px; animation-delay: 2.4s; }
-.orbit-node.node-5 { top: 0px; right: 20px; animation-delay: 3.2s; }
+.orbit-node.node-1 { top: 10px; left: 0px; animation-delay: 0s; }
+.orbit-node.node-2 { top: 120px; right: -15px; animation-delay: 0.8s; }
+.orbit-node.node-3 { bottom: 20px; left: 0px; animation-delay: 1.6s; }
+.orbit-node.node-4 { bottom: 10px; right: 0px; animation-delay: 2.4s; }
+.orbit-node.node-5 { top: 0px; right: 30px; animation-delay: 3.2s; }
+
+@keyframes float-node {
+  0% { transform: translateY(0px) scale(0.95); }
+  100% { transform: translateY(-8px) scale(1.05); }
+}
+
+/* --------------------------------------------------------------------------
+   3D ABOUT ARCHITECTURE LATTICE SCULPTURE
+   -------------------------------------------------------------------------- */
+.about-3d-spacer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  position: relative;
+}
+
+.about-monogram-container {
+  width: 320px;
+  height: 360px;
+  position: relative;
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-architecture-sculpture {
+  width: 240px;
+  height: 280px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: float-arch 7s ease-in-out infinite alternate;
+}
+
+@keyframes float-arch {
+  0% { transform: translateY(0px) rotateY(10deg) rotateX(-5deg); }
+  50% { transform: translateY(-14px) rotateY(-12deg) rotateX(6deg); }
+  100% { transform: translateY(0px) rotateY(10deg) rotateX(-5deg); }
+}
+
+.architecture-lattice-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.architecture-lattice-ring.ring-1 {
+  width: 260px;
+  height: 260px;
+  top: 10px;
+  left: -10px;
+  border: 2px dashed rgba(56, 189, 248, 0.45);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+  animation: rotate-arch-ring-1 14s linear infinite;
+}
+
+.architecture-lattice-ring.ring-2 {
+  width: 220px;
+  height: 220px;
+  top: 30px;
+  left: 10px;
+  border: 2px solid rgba(129, 140, 248, 0.4);
+  box-shadow: 0 0 20px rgba(129, 140, 248, 0.2);
+  transform: rotateX(60deg) rotateY(-20deg);
+  animation: rotate-arch-ring-2 18s linear infinite reverse;
+}
+
+@keyframes rotate-arch-ring-1 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes rotate-arch-ring-2 {
+  0% { transform: rotateX(60deg) rotateY(-20deg) rotateZ(0deg); }
+  100% { transform: rotateX(60deg) rotateY(-20deg) rotateZ(360deg); }
+}
+
+.architecture-core-box {
+  position: absolute;
+  top: 90px;
+  left: 70px;
+  width: 100px;
+  height: 100px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(2, 132, 199, 0.4) 100%);
+  border: 2px solid rgba(56, 189, 248, 0.6);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+}
+
+.core-box-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(56,189,248,0.2) 70%);
+  filter: blur(2px);
+}
+
+.architecture-nodes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.arch-node {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: var(--radius-capsule);
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-glass-bright);
+  color: var(--accent-emerald);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  white-space: nowrap;
+}
+
+.arch-node-1 { top: 0px; left: 10px; }
+.arch-node-2 { top: 110px; right: -25px; }
+.arch-node-3 { bottom: 10px; left: 0px; }
+.arch-node-4 { top: 120px; left: -25px; }
 
 @keyframes float-node {
   0% { transform: translateY(0px) scale(0.95); }

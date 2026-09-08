@@ -51,8 +51,8 @@ function initCameraTransitions() {
 
   const observerOptions = {
     root: null,
-    rootMargin: "-40% 0px -40% 0px",
-    threshold: 0
+    rootMargin: "-20% 0px -20% 0px",
+    threshold: 0.1
   };
 
   const cameraSectionObserver = new IntersectionObserver((entries) => {
@@ -67,6 +67,17 @@ function initCameraTransitions() {
   }, observerOptions);
 
   sections.forEach((sec) => cameraSectionObserver.observe(sec));
+
+  // Continuous Scroll Camera Fly-Through Binding
+  window.addEventListener("scroll", () => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (maxScroll <= 0) return;
+    const scrollFraction = window.scrollY / maxScroll;
+
+    targetCamPos.y = -scrollFraction * 95;
+    targetCamLook.y = -scrollFraction * 95;
+    targetCamPos.x = Math.sin(scrollFraction * Math.PI * 2) * 2;
+  });
 }
 
 if (document.readyState === "loading") {
