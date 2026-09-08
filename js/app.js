@@ -5,17 +5,18 @@
 document.addEventListener("DOMContentLoaded", () => {
   // 0. Theme Controller (Light / Dark Studio Switcher)
   const themeToggleBtn = document.getElementById("themeToggleBtn");
-  const sunIcon = themeToggleBtn ? themeToggleBtn.querySelector(".theme-icon-sun") : null;
-  const moonIcon = themeToggleBtn ? themeToggleBtn.querySelector(".theme-icon-moon") : null;
 
   function updateThemeUI(theme) {
     document.documentElement.setAttribute("data-theme", theme);
+    const sunIcon = document.querySelector(".theme-icon-sun");
+    const moonIcon = document.querySelector(".theme-icon-moon");
+
     if (sunIcon && moonIcon) {
       if (theme === "light") {
         sunIcon.style.display = "none";
-        moonIcon.style.display = "block";
+        moonIcon.style.display = "inline-block";
       } else {
-        sunIcon.style.display = "block";
+        sunIcon.style.display = "inline-block";
         moonIcon.style.display = "none";
       }
     }
@@ -31,7 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
   updateThemeUI(initialTheme);
 
   if (themeToggleBtn) {
-    themeToggleBtn.addEventListener("click", () => {
+    themeToggleBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       const current = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
       localStorage.setItem("portfolio-theme", current);
       updateThemeUI(current);
