@@ -68,6 +68,32 @@ function initThreeScene() {
   window.fillLight = fillLight;
   window.rimLight = rimLight;
 
+  // 4b. Create Interactive 3D Particle Cloud / Constellation Swarm (Auralis / Apple Style)
+  const particleCount = 1200;
+  const particleGeometry = new THREE.BufferGeometry();
+  const particlePositions = new Float32Array(particleCount * 3);
+
+  for (let i = 0; i < particleCount; i++) {
+    particlePositions[i * 3] = (Math.random() - 0.5) * 45;
+    particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 120;
+    particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 35;
+  }
+
+  particleGeometry.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
+
+  const particleMaterial = new THREE.PointsMaterial({
+    color: 0x38bdf8,
+    size: 0.14,
+    transparent: true,
+    opacity: 0.65,
+    blending: THREE.AdditiveBlending
+  });
+
+  const particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+  scene.add(particleSystem);
+  window.particleSystem = particleSystem;
+  window.particleMaterial = particleMaterial;
+
   // 5. Build 3D Geometries & Monogram Sculpture
   if (typeof build3DObjects === "function") {
     build3DObjects(scene);
@@ -162,6 +188,12 @@ function animateThreeScene() {
     window.spatialTechGroup.rotation.y = elapsedTime * 0.04 + mouseX * 0.15;
   }
 
+  // Rotate Particle Constellation Swarm
+  if (window.particleSystem) {
+    window.particleSystem.rotation.y = elapsedTime * 0.02 + mouseX * 0.1;
+    window.particleSystem.rotation.x = Math.sin(elapsedTime * 0.03) * 0.05 + mouseY * 0.05;
+  }
+
   // Camera Position Updates
   if (typeof updateCameraPosition === "function") {
     updateCameraPosition();
@@ -187,6 +219,11 @@ function setThreeSceneTheme(theme) {
   if (window.ambientLight) {
     window.ambientLight.color.setHex(isLight ? 0xe2e8f0 : 0xf8fafc);
     window.ambientLight.intensity = isLight ? 1.2 : 0.85;
+  }
+
+  if (window.particleMaterial) {
+    window.particleMaterial.color.setHex(isLight ? 0x0284c7 : 0x38bdf8);
+    window.particleMaterial.opacity = isLight ? 0.75 : 0.65;
   }
 
   if (window.threeMaterials) {
