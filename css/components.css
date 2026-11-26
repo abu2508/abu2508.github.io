@@ -693,3 +693,12 @@
   color: #0284C7 !important;
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12) !important;
 }
+
+
+/* Section helper note (e.g. NDA disclaimer under the projects heading) */
+.section-note {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+}

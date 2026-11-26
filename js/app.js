@@ -27,14 +27,19 @@ function updateThemeUI(theme) {
 
 function togglePortfolioTheme() {
   const current = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
-  localStorage.setItem("portfolio-theme", current);
+  try { localStorage.setItem("portfolio-theme", current); } catch (e) { /* storage unavailable */ }
   updateThemeUI(current);
 }
 
 window.updateThemeUI = updateThemeUI;
 window.togglePortfolioTheme = togglePortfolioTheme;
 
+let appInitialised = false;
+
 function initApp() {
+  if (appInitialised) return;
+  appInitialised = true;
+
   const themeToggleBtn = document.getElementById("themeToggleBtn");
   const initialTheme = document.documentElement.getAttribute("data-theme") || "dark";
   updateThemeUI(initialTheme);
@@ -74,23 +79,31 @@ function initApp() {
   const navLinks = document.querySelectorAll(".nav-capsule-link");
   const sections = document.querySelectorAll("section[id], header[id]");
 
-  window.addEventListener("scroll", () => {
+  let spyTicking = false;
+  function updateScrollSpy() {
+    spyTicking = false;
     let current = "hero";
     sections.forEach((sec) => {
       const top = sec.offsetTop - 150;
-      const height = sec.offsetHeight;
-      if (window.scrollY >= top && window.scrollY < top + height) {
+      if (window.scrollY >= top && window.scrollY < top + sec.offsetHeight) {
         current = sec.getAttribute("id");
       }
     });
-
     navLinks.forEach((link) => {
-      link.classList.remove("active");
-      if (link.getAttribute("href") === `#${current}`) {
-        link.classList.add("active");
-      }
+      const isActive = link.getAttribute("href") === `#${current}`;
+      link.classList.toggle("active", isActive);
+      if (isActive) link.setAttribute("aria-current", "true");
+      else link.removeAttribute("aria-current");
     });
-  });
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!spyTicking) {
+      spyTicking = true;
+      requestAnimationFrame(updateScrollSpy);
+    }
+  }, { passive: true });
+  updateScrollSpy();
 
   // 3. Brand Logo Smooth Scroll-to-Top
   const brandLogo = document.querySelector(".nav-brand-logo");
@@ -159,4 +172,3 @@ if (document.readyState === "loading") {
 } else {
   initApp();
 }
-window.addEventListener("load", initApp);

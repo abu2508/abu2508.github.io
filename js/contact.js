@@ -3,10 +3,16 @@
    ========================================================================== */
 
 function copyEmailToClipboard(emailStr = "abdullahathu2@gmail.com") {
+  const fallback = () => showToastNotification("Copy failed. Email: " + emailStr);
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    fallback();
+    return;
+  }
   navigator.clipboard.writeText(emailStr).then(() => {
     showToastNotification("Email copied: " + emailStr);
   }).catch(err => {
     console.error("Failed to copy email: ", err);
+    fallback();
   });
 }
 

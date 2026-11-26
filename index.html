@@ -9,6 +9,8 @@
   <meta name="description" content="Portfolio of Abdullah B, an AI/ML Engineer building production GenAI systems across RAG, AWS, LLM orchestration, enterprise automation and cloud architecture.">
   <meta name="keywords" content="Abdullah B, AI/ML Engineer, GenAI, AWS Bedrock, RAG, Solution Architect, Multi-tenant AI, ChromaDB, FastAPI, Python, Three.js">
   <meta name="author" content="Abdullah B">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
   <link rel="canonical" href="https://abu2508.github.io/">
 
   <!-- Open Graph / Social Preview -->
@@ -17,6 +19,16 @@
   <meta property="og:title" content="Abdullah B — AI/ML Engineer | GenAI, Cloud &amp; Automation">
   <meta property="og:description" content="Building production-grade GenAI systems across RAG, cloud infrastructure, automation, and enterprise AI.">
   <meta property="og:site_name" content="Abdullah B Portfolio">
+  <meta property="og:image" content="https://abu2508.github.io/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Abdullah B — AI/ML Engineer">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Abdullah B — AI/ML Engineer | GenAI, Cloud &amp; Automation">
+  <meta name="twitter:description" content="Building production-grade GenAI systems across RAG, cloud infrastructure, automation, and enterprise AI.">
+  <meta name="twitter:image" content="https://abu2508.github.io/assets/og-image.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -32,14 +44,6 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/transitions.css">
 
-  <!-- Three.js CDN Library with Failover -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script>
-    if (typeof THREE === "undefined") {
-      document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"><\/script>');
-    }
-  </script>
-
   <!-- Structured JSON-LD Metadata -->
   <script type="application/ld+json">
   {
@@ -47,6 +51,9 @@
     "@type": "Person",
     "name": "Abdullah B",
     "jobTitle": "AI/ML Engineer",
+    "description": "AI/ML Engineer building production GenAI systems: RAG, AWS Bedrock, LLM orchestration and enterprise automation.",
+    "image": "https://abu2508.github.io/assets/og-image.png",
+    "knowsAbout": ["Generative AI", "Retrieval-Augmented Generation", "AWS Bedrock", "LLM orchestration", "Model Context Protocol", "Cloud architecture", "Workflow automation"],
     "worksFor": {
       "@type": "Organization",
       "name": "Tata Consultancy Services (TCS)"
@@ -59,51 +66,20 @@
   }
   </script>
 
-  <!-- Anti-FOUC Theme Initialization & Global Theme Controller -->
+  <!-- Anti-FOUC theme initialisation (theme controller lives in js/app.js) -->
   <script>
-    function updateThemeUI(theme) {
-      document.documentElement.setAttribute("data-theme", theme);
-      const sunIcon = document.querySelector(".theme-icon-sun");
-      const moonIcon = document.querySelector(".theme-icon-moon");
-
-      if (sunIcon && moonIcon) {
-        if (theme === "light") {
-          sunIcon.style.display = "none";
-          moonIcon.style.display = "inline-block";
-        } else {
-          sunIcon.style.display = "inline-block";
-          moonIcon.style.display = "none";
-        }
-      }
-      const themeToggleBtn = document.getElementById("themeToggleBtn");
-      if (themeToggleBtn) {
-        themeToggleBtn.setAttribute("aria-label", `Switch to ${theme === "light" ? "dark" : "light"} theme`);
-      }
-      if (typeof window.setThreeSceneTheme === "function") {
-        window.setThreeSceneTheme(theme);
-      }
-    }
-
-    function togglePortfolioTheme() {
-      const current = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
-      localStorage.setItem("portfolio-theme", current);
-      updateThemeUI(current);
-    }
-    window.togglePortfolioTheme = togglePortfolioTheme;
-    window.updateThemeUI = updateThemeUI;
-
     (function() {
-      const savedTheme = localStorage.getItem("portfolio-theme");
-      const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-      const theme = savedTheme ? savedTheme : (prefersLight ? "light" : "dark");
-      document.documentElement.setAttribute("data-theme", theme);
+      var saved = null;
+      try { saved = localStorage.getItem("portfolio-theme"); } catch (e) {}
+      var prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+      document.documentElement.setAttribute("data-theme", saved || (prefersLight ? "light" : "dark"));
     })();
   </script>
 </head>
 <body>
 
   <!-- Accessible Skip-to-Content Link -->
-  <a href="#hero" class="skip-to-content">Skip to main content</a>
+  <a href="#about" class="skip-to-content">Skip to main content</a>
 
   <!-- WebGL 3D Canvas Background Layer -->
   <canvas id="webgl-canvas"></canvas>
@@ -127,7 +103,7 @@
 
       <a href="#contact" class="nav-capsule-btn">GET IN TOUCH</a>
 
-      <button class="theme-toggle-btn" id="themeToggleBtn" onclick="togglePortfolioTheme()" aria-label="Toggle theme light or dark" title="Toggle Light/Dark Theme">
+      <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme light or dark" title="Toggle Light/Dark Theme">
         <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
@@ -135,7 +111,7 @@
   </div>
 
   <!-- Main Application Content -->
-  <div id="app-content">
+  <main id="app-content">
 
     <!-- ==========================================================================
          SECTION 1 — HERO SECTION
@@ -166,7 +142,11 @@
               </a>
 
               <a href="#about" class="btn-cinematic btn-cinematic-glass">
-                <span>ABOUT ARCHITECTURE</span>
+                <span>ABOUT ME</span>
+              </a>
+
+              <a href="assets/Abdullah_B_Resume.pdf" class="btn-cinematic btn-cinematic-glass" download hidden>
+                <span>DOWNLOAD CV</span>
               </a>
 
               <button onclick="copyEmailToClipboard()" class="btn-cinematic btn-cinematic-glass" style="padding:12px 20px;" aria-label="Copy Email address to clipboard">
@@ -269,7 +249,7 @@
       <div class="container">
         <div class="section-header cinematic-reveal">
           <span class="section-meta-tag">02 // CAREER PROGRESSION</span>
-          <h2 class="section-editorial-title">Professional Experience</h2>
+          <h2 class="section-editorial-title">Experience &amp; Education</h2>
         </div>
 
         <div class="experience-cards-stack">
@@ -345,6 +325,7 @@
         <div class="section-header cinematic-reveal">
           <span class="section-meta-tag">03 // PRODUCT SHOWCASES</span>
           <h2 class="section-editorial-title">Featured AI &amp; Cloud Projects</h2>
+          <p class="section-note">Client and project details are anonymized to respect ongoing NDAs.</p>
         </div>
 
         <div class="projects-showcase-grid">
@@ -363,7 +344,7 @@
                 <span class="tech-badge-chip">AWS Transcribe</span>
               </div>
             </div>
-            <button onclick="openCaseStudyModal('kt-onboarding')" class="project-card-action" aria-expanded="false" aria-controls="caseStudyModal" aria-label="Explore Knowledge Transfer Platform Case Study">
+            <button onclick="openCaseStudyModal('kt-onboarding')" class="project-card-action" aria-haspopup="dialog" aria-controls="caseStudyModal" aria-label="Explore Knowledge Transfer Platform Case Study">
               <span>EXPLORE CASE STUDY →</span>
             </button>
           </article>
@@ -383,7 +364,7 @@
                 <span class="tech-badge-chip">ServiceNow</span>
               </div>
             </div>
-            <button onclick="openCaseStudyModal('it-support-chatbot')" class="project-card-action" aria-expanded="false" aria-controls="caseStudyModal" aria-label="Explore Multi-Tenant IT Support Case Study">
+            <button onclick="openCaseStudyModal('it-support-chatbot')" class="project-card-action" aria-haspopup="dialog" aria-controls="caseStudyModal" aria-label="Explore Multi-Tenant IT Support Case Study">
               <span>EXPLORE CASE STUDY →</span>
             </button>
           </article>
@@ -402,7 +383,7 @@
                 <span class="tech-badge-chip">Sentence-Transformers</span>
               </div>
             </div>
-            <button onclick="openCaseStudyModal('cv-sorting')" class="project-card-action" aria-expanded="false" aria-controls="caseStudyModal" aria-label="Explore Candidate Screening Case Study">
+            <button onclick="openCaseStudyModal('cv-sorting')" class="project-card-action" aria-haspopup="dialog" aria-controls="caseStudyModal" aria-label="Explore Candidate Screening Case Study">
               <span>EXPLORE CASE STUDY →</span>
             </button>
           </article>
@@ -422,7 +403,7 @@
                 <span class="tech-badge-chip">PagerDuty</span>
               </div>
             </div>
-            <button onclick="openCaseStudyModal('patch-orchestration')" class="project-card-action" aria-expanded="false" aria-controls="caseStudyModal" aria-label="Explore Patch Orchestration Case Study">
+            <button onclick="openCaseStudyModal('patch-orchestration')" class="project-card-action" aria-haspopup="dialog" aria-controls="caseStudyModal" aria-label="Explore Patch Orchestration Case Study">
               <span>EXPLORE CASE STUDY →</span>
             </button>
           </article>
@@ -442,7 +423,7 @@
                 <span class="tech-badge-chip">React</span>
               </div>
             </div>
-            <button onclick="openCaseStudyModal('incident-management')" class="project-card-action" aria-expanded="false" aria-controls="caseStudyModal" aria-label="Explore Major Incident Assistant Case Study">
+            <button onclick="openCaseStudyModal('incident-management')" class="project-card-action" aria-haspopup="dialog" aria-controls="caseStudyModal" aria-label="Explore Major Incident Assistant Case Study">
               <span>EXPLORE CASE STUDY →</span>
             </button>
           </article>
@@ -461,7 +442,7 @@
                 <span class="tech-badge-chip">LLM Reasoning</span>
               </div>
             </div>
-            <button onclick="openCaseStudyModal('atics')" class="project-card-action" aria-expanded="false" aria-controls="caseStudyModal" aria-label="Explore ATICS Document Verification Case Study">
+            <button onclick="openCaseStudyModal('atics')" class="project-card-action" aria-haspopup="dialog" aria-controls="caseStudyModal" aria-label="Explore ATICS Document Verification Case Study">
               <span>EXPLORE CASE STUDY →</span>
             </button>
           </article>
@@ -569,6 +550,10 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </a>
 
+            <a href="assets/Abdullah_B_Resume.pdf" class="btn-cinematic btn-cinematic-glass" download hidden>
+              <span>DOWNLOAD CV</span>
+            </a>
+
             <a href="https://github.com/abu2508" target="_blank" rel="noopener" class="btn-cinematic btn-cinematic-glass">
               <span>GITHUB</span>
             </a>
@@ -597,7 +582,7 @@
       </div>
     </footer>
 
-  </div>
+  </main>
 
   <!-- 12-Stage Case Study Modal Drawer Container -->
   <div class="modal-overlay" id="caseStudyModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -612,12 +597,25 @@
     </div>
   </div>
 
-  <!-- Scripts -->
-  <script src="js/3d-objects.js"></script>
-  <script src="js/three-scene.js"></script>
-  <script src="js/camera-transitions.js"></script>
-  <script src="js/modal.js"></script>
-  <script src="js/contact.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Scripts: Three.js loads with CDN failover, then app scripts in order (non-blocking) -->
+  <script>
+    (function () {
+      function load(src) {
+        return new Promise(function (resolve, reject) {
+          var el = document.createElement("script");
+          el.src = src;
+          el.async = false;
+          el.onload = resolve;
+          el.onerror = function () { reject(new Error("Failed to load " + src)); };
+          document.body.appendChild(el);
+        });
+      }
+      var local = ["js/3d-objects.js", "js/three-scene.js", "js/camera-transitions.js", "js/modal.js", "js/contact.js", "js/app.js"];
+      load("https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js")
+        .catch(function () { return load("https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"); })
+        .catch(function () { console.warn("Three.js unavailable; continuing without the WebGL background."); })
+        .then(function () { return local.reduce(function (p, src) { return p.then(function () { return load(src); }); }, Promise.resolve()); });
+    })();
+  </script>
 </body>
 </html>
