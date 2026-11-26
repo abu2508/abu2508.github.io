@@ -1,34 +1,26 @@
 /* ==========================================================================
-   ABDULLAH B (ABU) — MAIN APPLICATION & NAVIGATION ORCHESTRATOR
+   ABDULLAH B — SITE BEHAVIOUR: theme, scroll reveal, scroll-spy
    ========================================================================== */
 
 function updateThemeUI(theme) {
   document.documentElement.setAttribute("data-theme", theme);
-  const sunIcon = document.querySelector(".theme-icon-sun");
-  const moonIcon = document.querySelector(".theme-icon-moon");
-
-  if (sunIcon && moonIcon) {
-    if (theme === "light") {
-      sunIcon.style.display = "none";
-      moonIcon.style.display = "inline-block";
-    } else {
-      sunIcon.style.display = "inline-block";
-      moonIcon.style.display = "none";
-    }
+  const sun = document.querySelector(".theme-icon-sun");
+  const moon = document.querySelector(".theme-icon-moon");
+  if (sun && moon) {
+    // Show the icon of the theme you would switch to
+    sun.style.display = theme === "light" ? "none" : "inline-block";
+    moon.style.display = theme === "light" ? "inline-block" : "none";
   }
-  const themeToggleBtn = document.getElementById("themeToggleBtn");
-  if (themeToggleBtn) {
-    themeToggleBtn.setAttribute("aria-label", `Switch to ${theme === "light" ? "dark" : "light"} theme`);
-  }
-  if (typeof window.setThreeSceneTheme === "function") {
-    window.setThreeSceneTheme(theme);
-  }
+  const btn = document.getElementById("themeToggleBtn");
+  if (btn) btn.setAttribute("aria-label", `Switch to ${theme === "light" ? "dark" : "light"} theme`);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute("content", theme === "light" ? "#fafaf7" : "#0b0f17");
 }
 
 function togglePortfolioTheme() {
-  const current = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
-  try { localStorage.setItem("portfolio-theme", current); } catch (e) { /* storage unavailable */ }
-  updateThemeUI(current);
+  const next = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+  try { localStorage.setItem("portfolio-theme", next); } catch (e) { /* storage unavailable */ }
+  updateThemeUI(next);
 }
 
 window.updateThemeUI = updateThemeUI;
@@ -40,131 +32,41 @@ function initApp() {
   if (appInitialised) return;
   appInitialised = true;
 
-  const themeToggleBtn = document.getElementById("themeToggleBtn");
-  const initialTheme = document.documentElement.getAttribute("data-theme") || "dark";
-  updateThemeUI(initialTheme);
+  updateThemeUI(document.documentElement.getAttribute("data-theme") || "dark");
+  const toggle = document.getElementById("themeToggleBtn");
+  if (toggle) toggle.addEventListener("click", togglePortfolioTheme);
 
-  if (themeToggleBtn) {
-    themeToggleBtn.onclick = (e) => {
-      e.preventDefault();
-      togglePortfolioTheme();
-    };
+  // Scroll reveal
+  const reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add("is-visible"); obs.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -60px 0px", threshold: 0.1 });
+    reveals.forEach((el) => io.observe(el));
+  } else {
+    reveals.forEach((el) => el.classList.add("is-visible"));
   }
 
-  // 1. Intersection Observer for Scroll Reveals
-  const revealElements = document.querySelectorAll(".cinematic-reveal");
-  const observerOptions = {
-    root: null,
-    rootMargin: "0px 0px -80px 0px",
-    threshold: 0.15
-  };
-
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  revealElements.forEach((el) => revealObserver.observe(el));
-
-  // Immediate visibility fallback for Hero elements
-  document.querySelectorAll("#hero .cinematic-reveal").forEach(el => {
-    el.classList.add("is-visible");
-  });
-
-  // 2. Active Scroll Spy for Navbar Capsule Links
-  const navLinks = document.querySelectorAll(".nav-capsule-link");
-  const sections = document.querySelectorAll("section[id], header[id]");
-
-  let spyTicking = false;
-  function updateScrollSpy() {
-    spyTicking = false;
-    let current = "hero";
-    sections.forEach((sec) => {
-      const top = sec.offsetTop - 150;
-      if (window.scrollY >= top && window.scrollY < top + sec.offsetHeight) {
-        current = sec.getAttribute("id");
-      }
-    });
-    navLinks.forEach((link) => {
-      const isActive = link.getAttribute("href") === `#${current}`;
-      link.classList.toggle("active", isActive);
-      if (isActive) link.setAttribute("aria-current", "true");
-      else link.removeAttribute("aria-current");
+  // Scroll-spy
+  const links = document.querySelectorAll(".nav-link");
+  const sections = Array.from(document.querySelectorAll("section[id]"));
+  let ticking = false;
+  function spy() {
+    ticking = false;
+    let current = sections[0] ? sections[0].id : "top";
+    sections.forEach((s) => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+    links.forEach((l) => {
+      const on = l.getAttribute("href") === `#${current}`;
+      l.classList.toggle("active", on);
+      if (on) l.setAttribute("aria-current", "true"); else l.removeAttribute("aria-current");
     });
   }
-
   window.addEventListener("scroll", () => {
-    if (!spyTicking) {
-      spyTicking = true;
-      requestAnimationFrame(updateScrollSpy);
-    }
+    if (!ticking) { ticking = true; requestAnimationFrame(spy); }
   }, { passive: true });
-  updateScrollSpy();
-
-  // 3. Brand Logo Smooth Scroll-to-Top
-  const brandLogo = document.querySelector(".nav-brand-logo");
-  if (brandLogo) {
-    brandLogo.addEventListener("click", (e) => {
-      e.preventDefault();
-      const hero = document.getElementById("hero");
-      if (hero) {
-        hero.scrollIntoView({ behavior: "smooth" });
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    });
-  }
-
-  // 4. Hero Monogram Interactive 3D Parallax Tilt
-  const heroMonogram = document.getElementById("heroMonogramSculpture");
-  const heroSection = document.getElementById("hero");
-  if (heroMonogram && heroSection) {
-    heroSection.addEventListener("mousemove", (e) => {
-      const rect = heroSection.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -12;
-      const rotateY = ((x - centerX) / centerX) * 16;
-      heroMonogram.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-    });
-
-    heroSection.addEventListener("mouseleave", () => {
-      heroMonogram.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
-    });
-  }
-
-  // 5. Dynamic Apple Liquid Glass Card Sheen & 3D Tilt
-  const glassCards = document.querySelectorAll(".project-product-card, .tech-group-card, .bento-card, .stat-glass-card, .glass-card");
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const isFinePointer = window.matchMedia("(pointer: fine)").matches;
-
-  glassCards.forEach((card) => {
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty("--card-mouse-x", `${x}px`);
-      card.style.setProperty("--card-mouse-y", `${y}px`);
-
-      if (!prefersReducedMotion && isFinePointer) {
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -5;
-        const rotateY = ((x - centerX) / centerX) * 5;
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale3d(1.015, 1.015, 1.015)`;
-      }
-    });
-
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)";
-    });
-  });
+  spy();
 }
 
 if (document.readyState === "loading") {

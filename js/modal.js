@@ -134,13 +134,13 @@ function openCaseStudyModal(projectId) {
   const modalBody = document.getElementById("modalContentArea");
   const appContent = document.getElementById("app-content");
 
-  let stackChipsHtml = project.stack.map(s => `<span class="tech-badge-chip">${s}</span>`).join(" ");
+  let stackChipsHtml = project.stack.map(s => `<span class="chip">${s}</span>`).join("");
 
   modalBody.innerHTML = `
-    <div style="margin-bottom:32px;">
-      <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue-soft); text-transform:uppercase; margin-bottom:8px;">${project.category}</div>
-      <h2 id="modalTitle" style="font-family:var(--font-display); font-size:2.1rem; font-weight:800; color:var(--text-primary); line-height:1.2;">${project.title}</h2>
-      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">${stackChipsHtml}</div>
+    <div class="modal-head">
+      <div class="modal-head-cat">${project.category}</div>
+      <h2 id="modalTitle" class="modal-head-title">${project.title}</h2>
+      <div class="chips">${stackChipsHtml}</div>
     </div>
 
     <div class="modal-section-block">
@@ -176,7 +176,7 @@ function openCaseStudyModal(projectId) {
     <div class="modal-section-block">
       <div class="modal-section-num">06 — ARCHITECTURE</div>
       <h3 class="modal-section-heading">System Design Blueprint</h3>
-      <div style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:16px; border-radius:8px; font-family:var(--font-mono); font-size:0.85rem; color:var(--accent-blue-soft); white-space:pre-wrap;">${project.sections.architecture}</div>
+      <div class="modal-arch">${project.sections.architecture}</div>
     </div>
 
     <div class="modal-section-block">
@@ -209,7 +209,7 @@ function openCaseStudyModal(projectId) {
       <p class="modal-section-body">${project.sections.learned}</p>
     </div>
 
-    <div class="modal-section-block" style="border-bottom:none;">
+    <div class="modal-section-block">
       <div class="modal-section-num">12 — NEXT STEPS</div>
       <h3 class="modal-section-heading">Future Directions (Proposed)</h3>
       <p class="modal-section-body">${project.sections.nextSteps}</p>
